@@ -6,8 +6,12 @@ WEBHOOK_URL = os.environ['WEBHOOK_URL']
 http = urllib3.PoolManager()
 
 def lambda_handler(event, context):
-    sns_message = json.loads(event['Records'][0]['Sns']['Message'])
-    
+    try:
+        sns_message = json.loads(event['Records'][0]['Sns']['Message'])
+    except (KeyError, IndexError, json.JSONDecodeError) as e:
+        print(f"Failed to parse SNS event: {e}. Raw event: {json.dumps(event)}")
+        return {"statusCode": 400, "body": "Malformed SNS event."}
+
     alarm_name = sns_message.get('AlarmName', 'Unknown Alarm')
     alarm_state = sns_message.get('NewStateValue', 'Unknown State')
     
