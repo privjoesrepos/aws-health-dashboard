@@ -1,0 +1,9 @@
+{
+  "Records": [
+    {
+      "Sns": {
+        "Message": "{\"AlarmName\": \"IAM-Security-Alert\", \"NewStateValue\": \"ALARM\", \"NewStateReason\": \"Threshold crossed\"}"
+      }
+    }
+  ]
+}
