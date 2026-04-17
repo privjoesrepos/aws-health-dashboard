@@ -1,0 +1,18 @@
+services:
+  lambda:
+    build: 
+      context: .
+      platform: linux/amd64
+    ports:
+      - "9000:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./lambda_function.py:/var/task/lambda_function.py
+      
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8080/2015-03-31/functions/function/invocations", "-d", "{}"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
