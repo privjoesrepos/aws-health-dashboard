@@ -2,5 +2,10 @@
 *.tfstate.backup
 *.tfvars
 *.tfvars.json
-.DS_Store
 .terraform/
+.env
+*.zip
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
